@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package sample;
+
+service Calculation {
+  rpc Calculate (C2SRequest) returns (S2CReply) {}
+}
+
+message C2SRequest {
+  int32 lhs = 1;
+  int32 rhs = 2;
+  enum Operation {
+    Add = 0;
+    Subtract = 1;
+    Multiply = 2;
+    Divide = 3;
+  }
+  Operation op = 3;
+}
+
+message S2CReply {
+   int32 result = 1;
+   string message = 2;
+}

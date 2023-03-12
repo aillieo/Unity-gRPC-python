@@ -5,6 +5,8 @@ import grpc
 import protos.calculator_pb2 as calculator_pb2
 import protos.calculator_pb2_grpc as calculator_pb2_grpc
 
+_cleanup_coroutines = []
+
 
 class Calculator(calculator_pb2_grpc.CalculationServicer):
 
@@ -14,7 +16,7 @@ class Calculator(calculator_pb2_grpc.CalculationServicer):
             calculator_pb2.C2SRequest.Add: lambda lhs, rhs: lhs + rhs,
             calculator_pb2.C2SRequest.Subtract: lambda lhs, rhs: lhs - rhs,
             calculator_pb2.C2SRequest.Multiply: lambda lhs, rhs: lhs * rhs,
-            calculator_pb2.C2SRequest.Divide: lambda lhs, rhs: lhs / rhs
+            calculator_pb2.C2SRequest.Divide: lambda lhs, rhs: lhs // rhs
         }
 
     async def Calculate(
@@ -37,4 +39,10 @@ async def serve() -> None:
         logging.info("graceful_shutdown")
         await server.stop(5)
 
+    _cleanup_coroutines.append(server_graceful_shutdown())
+
     await server.wait_for_termination()
+
+
+def cleanup_coroutines() -> None:
+    return _cleanup_coroutines

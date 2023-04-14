@@ -1,25 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
-using UnityEngine;
 
-namespace AillieoUtils
+namespace AillieoUtils.UniPy
 {
-    internal class GRPCSettings : ScriptableObject
+    internal class GRPCSettingsProvider
     {
-        public int port;
-
-        public string pythonScript;
-
-        public string protoPath;
-        public string genCSProtoPath;
-        public string genPythonProtoPath;
-
-
-
         internal class Provider : SettingsProvider
         {
             private static new readonly string settingsPath = "AillieoUtils/UniPy";
@@ -115,7 +103,7 @@ namespace AillieoUtils
 
                 if (asset == null)
                 {
-                    asset = CreateInstance<GRPCSettings>();
+                    asset = ScriptableObject.CreateInstance<GRPCSettings>();
                 }
 
                 asset.hideFlags = HideFlags.DontSaveInEditor | HideFlags.DontUnloadUnusedAsset;

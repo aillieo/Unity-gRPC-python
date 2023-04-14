@@ -6,7 +6,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace AillieoUtils
+namespace AillieoUtils.UniPy
 {
     public static class PythonHelper
     {

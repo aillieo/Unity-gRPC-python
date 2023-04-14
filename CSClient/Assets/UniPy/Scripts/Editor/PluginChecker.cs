@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +7,7 @@ using System.Reflection;
 using System.Linq;
 using System.IO;
 
-namespace AillieoUtils
+namespace AillieoUtils.UniPy
 {
     [InitializeOnLoad]
     internal class PluginChecker
@@ -42,7 +41,7 @@ namespace AillieoUtils
             return importers.Any(i => match(i.assetPath));
         }
 
-        [MenuItem("AillieoUtils/UniPy/CheckAndAskToDownload")]
+        [MenuItem("AillieoUtils/UniPy/Check gRPG plugin")]
         public static void CheckAndAskToDownload()
         {
             if (HasPluginInstalled())
@@ -58,4 +57,3 @@ namespace AillieoUtils
         }
     }
 }
-#endif

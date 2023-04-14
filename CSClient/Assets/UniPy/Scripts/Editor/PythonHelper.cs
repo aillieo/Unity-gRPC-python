@@ -10,7 +10,7 @@ namespace AillieoUtils
 {
     public static class PythonHelper
     {
-        [MenuItem("AillieoUtils/gRPC/Start python server")]
+        [MenuItem("AillieoUtils/UniPy/Start python server")]
         private static void StartPythonServer()
         {
             RunPython("main.py");

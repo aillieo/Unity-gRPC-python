@@ -1,5 +1,5 @@
 .DS_Store
 Thumbs.db
 
-CSClient/Assets/Plugins/Grpc.Core/runtimes*
-CSClient/Assets/Plugins/Grpc.Core/runtimes/*
+CSClient/Assets/UniPy/Plugins/Grpc.Core/runtimes*
+CSClient/Assets/UniPy/Plugins/Grpc.Core/runtimes/*

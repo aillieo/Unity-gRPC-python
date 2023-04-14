@@ -42,7 +42,7 @@ namespace AillieoUtils
             return importers.Any(i => match(i.assetPath));
         }
 
-        [MenuItem("AillieoUtils/gRPC/CheckAndAskToDownload")]
+        [MenuItem("AillieoUtils/UniPy/CheckAndAskToDownload")]
         public static void CheckAndAskToDownload()
         {
             if (HasPluginInstalled())

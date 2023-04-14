@@ -1,0 +1,18 @@
+{
+    "name": "AillieoUtils.UniPy.Editor",
+    "rootNamespace": "",
+    "references": [
+        "AillieoUtils.UniPy"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

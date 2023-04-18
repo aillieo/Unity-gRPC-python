@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sample;
+
+service FigureRecognition {
+    rpc Recognize(RecognitionRequest) returns (RecognitionResponse) {}
+}
+
+message RecognitionRequest {
+    string image = 1;
+}
+
+message RecognitionResponse {
+    int32 number = 1;
+}

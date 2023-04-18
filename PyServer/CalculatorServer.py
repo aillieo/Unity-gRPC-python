@@ -1,4 +1,3 @@
-import asyncio
 import logging
 
 import grpc
@@ -8,7 +7,7 @@ import protos.calculator_pb2_grpc as calculator_pb2_grpc
 _cleanup_coroutines = []
 
 
-class Calculator(calculator_pb2_grpc.CalculationServicer):
+class CalculatorServer(calculator_pb2_grpc.CalculationServicer):
 
     def __init__(self):
 
@@ -29,7 +28,7 @@ class Calculator(calculator_pb2_grpc.CalculationServicer):
 
 async def serve() -> None:
     server = grpc.aio.server()
-    calculator_pb2_grpc.add_CalculationServicer_to_server(Calculator(), server)
+    calculator_pb2_grpc.add_CalculationServicer_to_server(CalculatorServer(), server)
     listen_addr = '[::]:50051'
     server.add_insecure_port(listen_addr)
     logging.info("Starting server on %s" % listen_addr)

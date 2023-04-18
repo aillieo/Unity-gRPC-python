@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package sample;
+
+service Multiplayer {
+    rpc Join(JoinRequest) returns (JoinResponse) {}
+    rpc Move(MoveRequest) returns (MoveResponse) {}
+    rpc SyncPos(stream RegisterSyncPos) returns (stream PushSyncPos) {}
+}
+
+message Position {
+    float x = 1;
+    float y = 2;
+}
+
+message JoinRequest {
+    Position pos = 1;
+}
+
+message JoinResponse {
+    int32 uid = 1;
+    Position pos = 2;
+}
+
+message MoveRequest {
+    Position pos = 1;
+}
+
+message MoveResponse {
+    Position pos = 1;
+}
+
+message RegisterSyncPos {
+}
+
+message PushSyncPos {
+    int32 uid = 1;
+    Position pos = 2;
+}

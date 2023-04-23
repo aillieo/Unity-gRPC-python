@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
-using System.Reflection;
 using System.Linq;
 using System.IO;
 
@@ -46,13 +43,60 @@ namespace AillieoUtils.UniPy
         {
             if (HasPluginInstalled())
             {
-
                 return;
             }
 
-            if (EditorUtility.DisplayDialog("Message", "gRPG plugin not fully installed", "Download now", "Ingore"))
+            int id = EditorUtility.DisplayDialogComplex("Message", "gRPG plugin not fully installed", "Download and install", "Ingore", "Download");
+            switch (id)
             {
-                Application.OpenURL(downloadURL);
+                case 0:
+                    DownloadAndInstall();
+                    break;
+                case 2:
+                    Application.OpenURL(downloadURL);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void DownloadAndInstall()
+        {
+            if (installationTask == null)
+            {
+                installationTask = new InstallationTask(downloadURL, Path.Combine(Application.dataPath, "UniPy"));
+                installationTask.Start();
+
+                EditorApplication.update -= OnUpdate;
+                EditorApplication.update += OnUpdate;
+            }
+        }
+
+        private static InstallationTask installationTask;
+
+        private static void OnUpdate()
+        {
+            if (installationTask != null)
+            {
+                if (installationTask.phase == InstallationTask.TaskPhase.Completed || installationTask.phase == InstallationTask.TaskPhase.Faulted)
+                {
+                    installationTask = null;
+                    EditorApplication.update -= OnUpdate;
+                    EditorUtility.ClearProgressBar();
+                }
+                else
+                {
+                    bool cancelRequested = EditorUtility.DisplayCancelableProgressBar("Installing gRPG plugin", $"Current phase: {installationTask.phase}", installationTask.GetProgress());
+                    if (cancelRequested)
+                    {
+                        installationTask.Cancel();
+                    }
+                }
+            }
+            else
+            {
+                EditorApplication.update -= OnUpdate;
+                EditorUtility.ClearProgressBar();
             }
         }
     }
